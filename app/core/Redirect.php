@@ -1,6 +1,16 @@
 <?php 
 class Redirect
 {
+	private static $_instance = null;
+
+	public static function initiate()
+	{
+		if (!isset(self::$_instance)) {
+			self::$_instance = new Redirect();
+		}
+		return self::$_instance;
+	}
+
 	public static function to($location = null)
 	{
 		if ($location) {
