@@ -13,7 +13,6 @@ class Welcome extends Controller
 			'name' => 'FjFrame',
 			'version' => 4,
 		];
-		echo $a;
 		$this->view('welcome', compact('code'));
 	}
 
