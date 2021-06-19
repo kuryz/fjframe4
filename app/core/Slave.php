@@ -4,9 +4,9 @@ class Slave
 	public static function section($division='',$t = '',$secure = false,$permission = null)
 	{
 		ob_start();
+		$user = new User;
 		$title = ($t != '')? $t : 'Title-Blank';
 		if($secure != false){
-			$user = new User;
 			if(!is_null($permission)){
 				if (!$user->isLoggedIn() || !$user->hasPermission($permission)){ die(print('<script>window.location.assign("'.SITE_URL.'")</script>'));}
 			}
