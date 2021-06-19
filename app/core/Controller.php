@@ -9,6 +9,7 @@ class controller
 	}
 	public function view($view, $data = [])
 	{
+		$user = new User;
 		$error = (object) error_get_last();
 		if(!empty($error) && isset($error->message) && $error->message != '') require_once APP_ROOT . '/views/errors/error_page.php';
 		 if(file_exists(APP_ROOT . '/views/' . str_replace('.', '/', $view) . '.php')){
