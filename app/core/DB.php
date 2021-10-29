@@ -134,7 +134,7 @@ class DB{
 						$this->where .= "`id` = ?";
 						$this->bindValues[] =  $param[0];
 					}elseif ($count_param == 2) {
-						$operators = explode(',', "=,>,<,>=,>=,<>");
+						$operators = explode(',', "=,>,<,>=,>=,<>,LIKE");
 						$operatorFound = false;
 
 						foreach ($operators as $operator) {
@@ -219,7 +219,7 @@ class DB{
 						$this->where .= "`id` = ?";
 						$this->bindValues[] =  $param[0];
 					}elseif ($count_param == 2) {
-						$operators = explode(',', "=,>,<,>=,>=,<>");
+						$operators = explode(',', "=,>,<,>=,>=,<>,LIKE");
 						$operatorFound = false;
 
 						foreach ($operators as $operator) {
@@ -350,7 +350,7 @@ class DB{
 						$this->where .= "`id` = ?";
 						$this->bindValues[] =  $param[0];
 					}elseif ($count_param == 2) {
-						$operators = explode(',', "=,>,<,>=,>=,<>");
+						$operators = explode(',', "=,>,<,>=,>=,<>,LIKE");
 						$operatorFound = false;
 
 						foreach ($operators as $operator) {
@@ -375,7 +375,7 @@ class DB{
 			}
 			// end of is array
 		}elseif ($num_args == 2) {
-			$operators = explode(',', "=,>,<,>=,>=,<>");
+			$operators = explode(',', "=,>,<,>=,>=,<>,LIKE");
 			$operatorFound = false;
 			foreach ($operators as $operator) {
 				if ( strpos($args[0], $operator) !== false ) {
@@ -440,7 +440,7 @@ class DB{
 						$this->where .= "`id` = ?";
 						$this->bindValues[] =  $param[0];
 					}elseif ($count_param == 2) {
-						$operators = explode(',', "=,>,<,>=,>=,<>");
+						$operators = explode(',', "=,>,<,>=,>=,<>,LIKE");
 						$operatorFound = false;
 
 						foreach ($operators as $operator) {
@@ -465,7 +465,7 @@ class DB{
 			}
 			// end of is array
 		}elseif ($num_args == 2) {
-			$operators = explode(',', "=,>,<,>=,>=,<>");
+			$operators = explode(',', "=,>,<,>=,>=,<>,LIKE");
 			$operatorFound = false;
 			foreach ($operators as $operator) {
 				if ( strpos($args[0], $operator) !== false ) {
@@ -616,7 +616,7 @@ class DB{
 				if ($this->join ==null ) {
 					$this->join = " INNER JOIN $table_name ON {$field} {$operator} {$value}";
 				}else{
-					$this->join .= ", INNER JOIN $table_name ON {$field} {$operator} {$value}";
+					$this->join .= " INNER JOIN $table_name ON {$field} {$operator} {$value}";
 				}
 			}
 		}
@@ -637,7 +637,7 @@ class DB{
 				if ($this->join ==null ) {
 					$this->join = " LEFT JOIN $table_name ON {$field} {$operator} {$value}";
 				}else{
-					$this->join .= ", LEFT JOIN $table_name ON {$field} {$operator} {$value}";
+					$this->join .= " LEFT JOIN $table_name ON {$field} {$operator} {$value}";
 				}
 			}
 		}

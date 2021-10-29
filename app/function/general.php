@@ -49,4 +49,27 @@ function error_parser($value ='')
 {
     return (!is_array(json_decode($value))) ? $value : json_decode($value);
 }
+//token call
+function crsf_token($value='')
+{
+    return '<input type="hidden" id="token" name="token" value="'.Token::generate().'" />';
+}
+function show_errors($value='error')
+{ 
+    if (Session::exists($value)):
+        $a = error_parser(Session::get($value));
+        if(is_array($a)):
+            foreach ($a as $key => $v) {
+                echo Alert::message($v, 4);
+            }
+        else:
+            echo Alert::message($a, 4);
+        endif;
+        Session::flash($value);
+    endif;
+}
+function show_status($value='status')
+{
+    if (Session::exists($value)) echo Session::flash($value);
+}
 ?>
