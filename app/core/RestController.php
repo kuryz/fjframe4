@@ -14,15 +14,15 @@ class RestController extends Controller
 
 	public $_status = 400, $_body = [], $_error = [];
 
-	public function rest_model($model)
+	public function restModel($model)
 	{
 		return $this->model($model);
 	}
-	public function json_result($data = [])
+	public function jsonResult($data = [])
 	{
 		echo json_encode($data);
 	}
-	public function json_response($response_code,$response_message,$data)
+	public function jsonResponse($response_code,$response_message,$data)
 	{
 	 	$final_result = array();
 	  	$response = array();
@@ -35,7 +35,7 @@ class RestController extends Controller
 		$final_result['response'] = $response;
 		$final_result['data'] = $data;
 
-		return $this->json_result($final_result);
+		return $this->jsonResult($final_result);
 	}
 }
 
