@@ -14,7 +14,7 @@ class RestController extends Controller
 
 	public $_status = 400, $_body = [], $_error = [];
 
-	public function restModel($model)
+	public function callModel($model)
 	{
 		return $this->model($model);
 	}
