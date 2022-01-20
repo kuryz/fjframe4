@@ -20,7 +20,7 @@ class RestController extends Controller
 	}
 	public function jsonResponse($response_code,$response_message,$data)
 	{
-		$this->json($response_code,$response_message,$data);
+		return $this->json($response_code,$response_message,$data);
 	}
 }
 
