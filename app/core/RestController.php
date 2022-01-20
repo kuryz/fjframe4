@@ -12,28 +12,29 @@ class RestController extends Controller
     const HTTP_FORBIDDEN = 403;
     const HTTP_NOT_FOUND = 404;
 
-	public $_status = 400, $_body = [], $_error = [];
+	protected $_status = 400, $_body = [], $_error = [];
 
 	public function callModel($model)
 	{
 		return $this->model($model);
 	}
-	public function jsonResult($data = [])
+	public function jsonResult($status, $result, $error)
 	{
+		$data = ['status' => $status, 'data' => (object)$result, 'error' => (object)$error];
 		echo json_encode($data);
 	}
 	public function jsonResponse($response_code,$response_message,$data)
 	{
 	 	$final_result = array();
 	  	$response = array();
-		$response['response_code']    = $response_code;
-		$response['response_message'] = $response_message;
+		$response['status']    = $response_code;
+		$response['message'] = (object)$response_message;
 
 	  	if(!empty($data)) $data = $data;
 		else $data = $data;
 	 	
-		$final_result['response'] = $response;
-		$final_result['data'] = $data;
+		$final_result['response'] = (object)$response;
+		$final_result['data'] = (object)$data;
 
 		return $this->jsonResult($final_result);
 	}

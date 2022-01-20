@@ -2,6 +2,7 @@
 ini_set('display_errors', 0);
 class controller
 {
+	protected $_status = 400, $_body = [], $_error = [];
 	public function model($model)
 	{
 		require_once APP_ROOT . '/models/' . $model . '.php';
@@ -17,8 +18,9 @@ class controller
 			require_once APP_ROOT . '/views/' . str_replace('.', '/', $view) . '.php';
 		}else require_once APP_ROOT . '/views/errors/404.php';
 	}
-	public function json($data = [])
+	public function json($status, $result, $error)
 	{
+		$data = ['status' => $status, 'data' => (object)$result, 'error' => (object)$error];
 		echo json_encode($data);
 	}
 }

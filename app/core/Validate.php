@@ -10,6 +10,7 @@ class Validate
 	public function __construct()
 	{
 		$this->_db = DB::getInstance();
+    	$this->_file = new File;
 	}
 
 	public static function initiate()
@@ -24,10 +25,10 @@ class Validate
 	{
 		foreach ($items as $item => $rules) {
 			foreach ($rules as $rule => $rule_value) {
-				 $value = (isset($_FILES[$item])) ? $_FILES[$item]['name'] : trim($source[$item]);
+				 $value = (isset($_FILES[$item])) ? $_FILES[$item] : trim($source[$item]);
 				$item = escape($item);
 				$it = str_replace('_', ' ', $item);
-				if ($rule === 'required' && empty($value)) {
+				if ($rule === 'required' && empty($value) ) {
 					//$it = str_replace('_', ' ', $item);
 					$this->addError("{$it} is required");
 				}else if(!empty($value)){
@@ -54,7 +55,22 @@ class Validate
 							}
 							break;
 						case 'numeric':
-							if(!is_numeric($value)) $this->addError("{$it} must be selected");
+							if(!is_numeric($value)) $this->addError("{$it} must be a number");
+							break;
+						case 'image':
+							if(!$this->_file->picExt($value)) $this->addError("{$it} file is invalid ");
+							break;
+						case 'document':
+							if(!$this->_file->docExt($value)) $this->addError("{$it} file is invalid");
+							break;
+						case 'file':
+							if($this->_file->fileExt($value) == 'invalid') $this->addError("file is invalid");
+							break;
+						case 'min-file-size':
+							if($this->_file->getSize($value) < ($rule_value*1000)) $this->addError("{$it} must be a minimum of {$rule_value}MB");
+							break;
+						case 'max-file-size':
+							if($this->_file->getSize($value) > ($rule_value*1000)) $this->addError("{$it} must be a maximum of {$rule_value}MB");
 							break;
 					}
 				}
