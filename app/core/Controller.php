@@ -18,9 +18,9 @@ class controller
 			require_once APP_ROOT . '/views/' . str_replace('.', '/', $view) . '.php';
 		}else require_once APP_ROOT . '/views/errors/404.php';
 	}
-	public function json($status, $result, $error)
+	public function json($status, $error, $result)
 	{
-		$data = ['status' => $status, 'data' => (object)$result, 'error' => (object)$error];
+		$data = ['status' => $status, 'message' => (object)$error, 'response' => (object)$result];
 		echo json_encode($data);
 	}
 }

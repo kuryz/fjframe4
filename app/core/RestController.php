@@ -14,29 +14,13 @@ class RestController extends Controller
 
 	protected $_status = 400, $_body = [], $_error = [];
 
-	public function callModel($model)
+	public function apiModel($model)
 	{
 		return $this->model($model);
 	}
-	public function jsonResult($status, $result, $error)
-	{
-		$data = ['status' => $status, 'data' => (object)$result, 'error' => (object)$error];
-		echo json_encode($data);
-	}
 	public function jsonResponse($response_code,$response_message,$data)
 	{
-	 	$final_result = array();
-	  	$response = array();
-		$response['status']    = $response_code;
-		$response['message'] = (object)$response_message;
-
-	  	if(!empty($data)) $data = $data;
-		else $data = $data;
-	 	
-		$final_result['response'] = (object)$response;
-		$final_result['data'] = (object)$data;
-
-		return $this->jsonResult($final_result);
+		$this->json($response_code,$response_message,$data);
 	}
 }
 
