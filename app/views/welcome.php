@@ -31,12 +31,14 @@
             .title {
                 font-size: 95px;
             }
+            img{width: 100px;}
         </style>
     </head>
     <body>
         <div class="container">
+            <img src="https://www.dropbox.com/s/h1ju6nzm1fcoaj7/fjframe.png?raw=1">
             <div class="content"><?=(isset($this->user->data()->first_name)) ? ucwords($this->user->data()->first_name) : ''?>
-                <div class="title" id="title"><?=$data->code->name?> 4 </div>
+                <div class="title" id="title"><?=$data->code->name?></div>
             </div>
         </div>
     </body>
