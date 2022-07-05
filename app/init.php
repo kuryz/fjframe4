@@ -30,8 +30,8 @@ $GLOBALS['config'] = array(
 );
 require_once __DIR__."/config.php";
 spl_autoload_register(function($class){
-	(file_exists(APP_ROOT.'/core/'.$class.'.php')) ? require_once 'core/'.$class.'.php' : require_once 'models/'.$class.'.php';
-	/*else require_once "third_party/phpqrcode/qrlib.php"*/;
+	if(file_exists(APP_ROOT.'/core/'.$class.'.php'))  require_once 'core/'.$class.'.php' ;
+	if(file_exists(APP_ROOT.'/models/'.$class.'.php'))  require_once 'models/'.$class.'.php' ;
 });
 
 
